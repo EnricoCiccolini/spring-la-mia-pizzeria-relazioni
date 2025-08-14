@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>edit</title>
+</head>
+
+<body>
+    <th:block th:replace="~{fragments/fragment :: navbar}"></th:block>
+    <div class="container">
+        <h1> edit </h1>
+
+        <form id="pizza-form" th:action="@{/pizzas/edit/{id}(id=${pizza.id})}" method="post" th:object="${pizza}">
+
+            <div class="mb-3">
+                <label class="form-label" for="name">name : </label>
+                <input class="form-control" type="text" id="name" th:field="*{name}" th:errorClass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('name') }" th:text="${error}"></li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">description: </label>
+                <textarea class="form-control" type="long-text" id="description" th:field="*{description}"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="image"> link image: </label>
+                <input class="form-control" type="text" id="image" th:field="*{image}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="price"> price: </label>
+                <input class="form-control" type="number" id="price" min="0" th:field="*{price}"
+                    th:errorClass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('price') }" th:text="${error}"></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="mb-3 justify-content-between">
+
+                <input type="submit" class="btn btn-primary" value="modifica la pizza">
+
+                <input type="reset" class="btn btn-warning" value="reset all">
+
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

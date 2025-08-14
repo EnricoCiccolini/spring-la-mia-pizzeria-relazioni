@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <th:block th:replace="~{fragments/fragment :: navbar}"></th:block>
+    <div class="container">
+        <h1> create a new offer for [[${offer.pizza.getName()}]]</h1>
+
+
+
+        <form id="offer-form" th:action="${edit} ? @{/offer/{id}/edit(id=${offer.id})} : @{/offer/create}" method="post"
+            th:object="${offer}">
+
+            <input type="hidden" th:field="*{pizza}" id="pizzainfo">
+
+            <div class="mb-3">
+                <label class="form-label" for="title">name : </label>
+                <input class="form-control" type="text" id="title" th:field="*{title}" th:errorClass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('title') }" th:text="${error}"></li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+            <div class="mb-3">
+                <label class="form-label" for="offer-begin">
+                    offer begin :</label>
+                <input class="form-control" type="date" id="offer-begin" th:field="*{beginDate}"
+                    th:errorClass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('beginDate')}">
+                    <ul>
+                        <li th:each="error: ${#fields.errors('beginDate')}" th:text="${error}">
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="offer-expired">
+                    offer expired :</label>
+                <input class="form-control" type="date" id="offer-expired" th:field="*{expiredDate}"
+                    th:errorClass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('expiredDate')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('expiredDate')}" th:text="${error}"></li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="mb-3 justify-content-between">
+
+                <input type="submit" class="btn btn-primary" value="modifica">
+
+                <input type="reset" class="btn btn-warning" value="reset all">
+
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

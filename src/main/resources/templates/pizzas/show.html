@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>Document</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/fragment :: navbar}"></th:block>
+    <div class="container">
+
+        <h1> ecco la tua pizza </h1>
+
+
+        <!-- <p th:text="${pizza}"></p> -->
+        <div class="card" style="width: 18rem;  " th:object="${pizza}">
+            <img th:src="*{image}" alt=[[*{name}]] class="card-img-top" style="max-width: 450px;">
+            <div class="card-body">
+                <h5 class="card-title"> [[*{name}]]</h5>
+                <p class="card-text">[[*{description}]]</p>
+                <p class="card-text">[[*{price}]] $</p>
+            </div>
+        </div>
+
+        <!-- prova con la tabella  -->
+        <table class="table" th:if="${pizza.getOffers().size()>0}">
+            <thead>
+                <tr>
+                    <th scope="col">id </th>
+                    <th scope="col">title </th>
+                    <th scope="col">begin</th>
+                    <th scope="col">expire</th>
+                    <th scope="col">modify</th>
+                    <th scope="col">--</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="offer : ${pizza.offers}">
+                    <td>[[${offer.id}]]</td>
+                    <td>[[${offer.title}]]</td>
+                    <td>[[${offer.beginDate}]]</td>
+                    <td>[[${offer.expiredDate}]] </td>
+
+                    <td><a class="btn btn-warning " th:href="@{/offer/edit/{id}(id=${offer.id})}">update</a></td>
+                    <!--<td> 
+                    <form action="" th:action="@{/pizzas/delete/{id}(id=*{id})}" method="post">
+                                <button type="submit" class="btn btn-danger ">delete</button>
+                            </form> -->
+
+                    <!-- Button trigger modal -->
+                    <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            th:data-bs-target="'#delete-modal-'+${pizza.id}">
+                            delete
+                        </button> -->
+
+                    <!-- Modal -->
+                    <!-- <div class="modal fade" th:id="'delete-modal-' + ${pizza.id}" tabindex="-1"
+                            aria-labelledby="delete-modal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5">deleting pizza "[[${pizza.name}]] ?"</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h3>Once deleted the data will be lost</h3>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">no</button>
+                                        <form action="" th:action="@{/pizzas/delete/{id}(id=*{id})}" method="post">
+                                            <button type="submit" class="btn btn-danger ">yes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                    <!-- </td> -->
+                </tr>
+
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+</body>
+
+</html>
