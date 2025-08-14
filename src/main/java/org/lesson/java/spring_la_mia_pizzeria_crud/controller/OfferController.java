@@ -1,6 +1,7 @@
 package org.lesson.java.spring_la_mia_pizzeria_crud.controller;
 
 import org.lesson.java.spring_la_mia_pizzeria_crud.model.Offer;
+import org.lesson.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lesson.java.spring_la_mia_pizzeria_crud.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,6 +49,15 @@ public class OfferController {
         }
         repository.save(formOffer);
         return "redirect:/pizzas/" + formOffer.getPizza().getId();
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, Model model) {
+        Offer offer = repository.findById(id).get();
+
+        repository.delete(offer);
+
+        return "redirect:/pizzas";
     }
 
 }

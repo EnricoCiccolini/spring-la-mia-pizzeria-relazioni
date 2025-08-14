@@ -30,12 +30,12 @@
         <table class="table" th:if="${pizza.getOffers().size()>0}">
             <thead>
                 <tr>
-                    <th scope="col">id </th>
-                    <th scope="col">title </th>
-                    <th scope="col">begin</th>
-                    <th scope="col">expire</th>
-                    <th scope="col">modify</th>
-                    <th scope="col">--</th>
+                    <th scope="col">Id </th>
+                    <th scope="col">Title </th>
+                    <th scope="col">Begin</th>
+                    <th scope="col">Expire</th>
+                    <th scope="col">Modify</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,24 +46,25 @@
                     <td>[[${offer.expiredDate}]] </td>
 
                     <td><a class="btn btn-warning " th:href="@{/offer/edit/{id}(id=${offer.id})}">update</a></td>
-                    <!--<td> 
+                    <td>
+                        <!--   
                     <form action="" th:action="@{/pizzas/delete/{id}(id=*{id})}" method="post">
                                 <button type="submit" class="btn btn-danger ">delete</button>
                             </form> -->
 
-                    <!-- Button trigger modal -->
-                    <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            th:data-bs-target="'#delete-modal-'+${pizza.id}">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            th:data-bs-target="'#delete-modal-'+${offer.id}">
                             delete
-                        </button> -->
+                        </button>
 
-                    <!-- Modal -->
-                    <!-- <div class="modal fade" th:id="'delete-modal-' + ${pizza.id}" tabindex="-1"
+                        <!-- Modal -->
+                        <div class="modal fade" th:id="'delete-modal-' + ${offer.id}" tabindex="-1"
                             aria-labelledby="delete-modal" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5">deleting pizza "[[${pizza.name}]] ?"</h1>
+                                        <h1 class="modal-title fs-5">deleting pizza "[[${offer.title}]] ?"</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -73,16 +74,16 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">no</button>
-                                        <form action="" th:action="@{/pizzas/delete/{id}(id=*{id})}" method="post">
+                                        <form action="" th:action="@{/offer/delete/{id}(id=${offer.id})}" method="post">
                                             <button type="submit" class="btn btn-danger ">yes</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
 
-                    <!-- </td> -->
+                    </td>
                 </tr>
 
 
@@ -92,6 +93,7 @@
 
 
     </div>
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 
 </html>
