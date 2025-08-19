@@ -27,6 +27,15 @@
             </div>
 
             <div class="mb-3">
+                <div class="single-category form-check" th:each="ingredient :${ingredients}">
+                    <input type="checkbox" th:id="|ingredient-${ingredient.id}|" th:field="*{ingredients}"
+                        th:value="${ingredient.id}">
+                    <label class="form-check-label"
+                        th:for="|ingredient-${ingredient.id}|">[[${ingredient.name}]]</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label" for="description">description: </label>
                 <textarea class="form-control" type="long-text" id="description" th:field="*{description}"></textarea>
             </div>

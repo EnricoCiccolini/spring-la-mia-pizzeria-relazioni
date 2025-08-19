@@ -5,71 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
-    <title>Document</title>
+    <title>ingredient</title>
 </head>
 
 <body>
     <th:block th:replace="~{fragments/fragment :: navbar}"></th:block>
 
 
-    <form method="GET" th:action="@{/pizzas/searchByName}" class="text-center ">
-        <input type="text" name="name" placeholder="insert your pizza" th:value="${name}" />
-        <button class="btn btn-primary" type="submit">Cerca</button>
-    </form>
-
 
     <div class="container">
+        <h1> index ingredient</h1>
+        <a th:href="@{/ingredient/create}" class="btn btn-success">add new ingredient</a>
 
-        <h1> index pizzeria</h1>
-        <a th:href="@{/pizzas/create}" class="btn btn-success">add new pizza</a>
-
-
-        <div class="container" th:if="${pizzas.size() > 0}">
-
+        <div class="container" th:if="${ingredient.size() > 0}">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">id </th>
+                        <th scope="col">id</th>
                         <th scope="col">name </th>
-                        <th scope="col">description</th>
                         <th scope="col">image</th>
-                        <th scope="col"> price </th>
-                        <th scope="col">create offer</th>
                         <th scope="col">info</th>
                         <th scope="col">--</th>
                         <th scope="col">--</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="pizza :${pizzas}" th:object="${pizza}">
+                    <tr th:each="ingredient:${ingredient}" th:object="${ingredient}">
                         <td>[[*{id}]]</td>
                         <td>[[*{name}]]</td>
-                        <td>[[*{description}]]</td>
                         <td><img th:src="*{image}" alt=[[*{name}]] style="max-width: 150px;"></td>
-                        <td>[[*{price}]] $</td>
-                        <td><a class="btn btn-primary " th:href="@{/pizzas/{id}/offer(id=*{id})}">offer</a>
-                        </td>
-                        <td><a class="btn btn-primary " th:href="@{/pizzas/{id}(id=*{id})}">dettails</a>
-                        </td>
-                        <td><a class="btn btn-warning " th:href="@{/pizzas/edit/{id}(id=*{id})}">modify</a></td>
+                        <td><a class="btn btn-primary " th:href="@{/ingredient/{id}(id=*{id})}">dettails</a></td>
+                        <td><a class="btn btn-warning " th:href="@{/ingredient/edit/{id}(id=*{id})}">modify</a></td>
                         <td>
-                            <!-- <form action="" th:action="@{/pizzas/delete/{id}(id=*{id})}" method="post">
-                                <button type="submit" class="btn btn-danger ">delete</button>
-                            </form> -->
-
-                            <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                th:data-bs-target="'#delete-modal-'+${pizza.id}">
+                                th:data-bs-target="'#delete-modal-'+${ingredient.id}">
                                 delete
                             </button>
 
-                            <!-- Modal -->
-                            <div class="modal fade" th:id="'delete-modal-' + ${pizza.id}" tabindex="-1"
+                            <div class="modal fade" th:id="'delete-modal-' + ${ingredient.id}" tabindex="-1"
                                 aria-labelledby="delete-modal" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5">deleting pizza "[[${pizza.name}]] ?"</h1>
+                                            <h1 class="modal-title fs-5">deleting ingredient "[[${ingredient.name}]]
+                                                ?"</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
@@ -79,24 +58,21 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">no</button>
-                                            <form action="" th:action="@{/pizzas/delete/{id}(id=*{id})}" method="post">
+                                            <form action="" th:action="@{/ingredient/delete/{id}(id=*{id})}"
+                                                method="post">
                                                 <button type="submit" class="btn btn-danger ">yes</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
                         </td>
                     </tr>
-
-
                 </tbody>
             </table>
         </div>
-        <div class="container" th:unless="${pizzas.size() > 0}">
-            <h2>no pizza today </h2>
+        <div class="container" th:unless="${ingredient.size() > 0}">
+            <h2>no ingredient today </h2>
         </div>
     </div>
     <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>

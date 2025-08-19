@@ -23,6 +23,16 @@
                 <h5 class="card-title"> [[*{name}]]</h5>
                 <p class="card-text">[[*{description}]]</p>
                 <p class="card-text">[[*{price}]] $</p>
+                <th:block th:if="${pizza.getIngredients().size()>0}">
+                    <h3 class="mb-2">ingredient </h3>
+                    <ul class="mb-3 ps-4">
+                        <li th:each="ingredient: *{ingredients}" th:text="${ingredient.name}"></li>
+
+                    </ul>
+
+
+                </th:block>
+
             </div>
         </div>
 
